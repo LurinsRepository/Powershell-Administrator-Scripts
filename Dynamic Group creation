@@ -1,0 +1,26 @@
+#Exchange Dynamic group creation script
+
+Connect-ExchangeOnline
+
+$Group = Get-DynamicDistributionGroup -Identity "AllRegionalDirector@lurin.com"
+Get-Recipient -RecipientPreviewFilter $Group.RecipientFilter
+
+
+
+
+$Filter = "((Title -eq 'Resident Service Director') -and (ExchangeUserAccountControl -ne 'AccountDisabled'))"
+
+$Filter = "((Title -eq 'Assistant Community Director') -and (ExchangeUserAccountControl -ne 'AccountDisabled'))"
+
+
+Get-Recipient -RecipientPreviewFilter $Filter | ft displayname, title
+
+New-DynamicDistributionGroup -Name "S+H Resident Service Director" -DisplayName "S+H Resident Service Director" -Alias Resident Service Director -PrimarySmtpAddress ResidentServiceDirector@stewardandhelm.com -RecipientFilter $Filter
+
+New-DynamicDistributionGroup -Name "S+H Resident Service Director" -DisplayName "S+H Resident Service Director" -Alias ResidentServiceDirector -PrimarySmtpAddress ResidentServiceDirector@stewardandhelm.com -RecipientFilter $Filter
+
+
+
+
+
+
