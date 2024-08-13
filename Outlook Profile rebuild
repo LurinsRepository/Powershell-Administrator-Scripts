@@ -1,0 +1,23 @@
+#New Outlook profile
+
+
+
+# Define the path to the Outlook profile in the registry
+$OutlookProfilePath = "HKCU:\Software\Microsoft\Office\16.0\Outlook\Profiles\YourProfileName"
+
+# Create the new Outlook profile
+New-Item -Path $OutlookProfilePath
+
+
+
+# Define the path to the Outlook profile in the registry
+$OutlookProfilePath = "HKCU:\Software\Microsoft\Office\16.0\Outlook\Profiles\NewS+H"
+
+# Create the new Outlook profile
+New-Item -Path $OutlookProfilePath
+
+# Define the path to the default profile setting in the registry
+$DefaultProfilePath = "HKCU:\Software\Microsoft\Office\16.0\Outlook"
+
+# Set the new profile as the default
+Set-ItemProperty -Path $DefaultProfilePath -Name "DefaultProfile" -Value "NewS+H"
