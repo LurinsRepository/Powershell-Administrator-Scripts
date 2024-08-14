@@ -1,0 +1,9 @@
+#This scrpt is to grab all PA flows from as tenant.
+
+Install-Module -Name Microsoft.PowerApps.Administration.PowerShell   
+
+$allTenantFlow = Get-AdminFlow 
+
+$allTenantFlow | select DisplayName,FlowName,CreatedTime,LastModifiedTime,CreatedBy,EnvironmentName | Export-Csv -path C:\temp\AllTenantF2low.csv 
+$allTenantFlow | Where-Object { $_.Creator -eq 'YourDesiredCreator' } | Select-Object DisplayName, FlowName, CreatedTime, LastModifiedTime, CreatedBy, EnvironmentName | Export-Csv -Path C:\temp\CurrentFlowsCreator.csv
+  
