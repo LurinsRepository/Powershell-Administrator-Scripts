@@ -1,0 +1,55 @@
+#Adding
+
+Import-Module Microsoft.Graph.Users.Actions
+
+$params = @{
+    addLicenses = @(
+        @{
+            disabledPlans = @()
+            skuId = "ae2343d1-0999-43f6-ae18-d816516f6e78"
+        }
+    )
+    removeLicenses = @()
+}
+
+# A UPN can also be used as -UserId.
+Set-MgUserLicense -UserId "tgray@lurin.com" -BodyParameter $params
+
+
+#Removing
+
+
+
+Import-Module Microsoft.Graph.Users.Actions
+
+$params = @{
+    addLicenses = @()
+    removeLicenses = @(
+        "ae2343d1-0999-43f6-ae18-d816516f6e78"
+    )
+}
+
+# A UPN can also be used as -UserId.
+Set-MgUserLicense -UserId "tgray@lurin.com" -BodyParameter $params
+
+
+
+#mulitple Users
+
+
+Import-Module Microsoft.Graph.Users.Actions
+
+# Define the users and the license to be removed
+$users = @("tgray@lurin.com", "hdo@lurin.com", "Scan@lurin.com")
+$licenseToRemove = "ae2343d1-0999-43f6-ae18-d816516f6e78"
+
+# Loop through each user and remove the license
+foreach ($user in $users) {
+    $params = @{
+        addLicenses = @()
+        removeLicenses = @($licenseToRemove)
+    }
+
+    Set-MgUserLicense -UserId $user -BodyParameter $params
+}
+
